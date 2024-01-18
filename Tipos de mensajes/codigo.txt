@@ -1,0 +1,44 @@
+*&---------------------------------------------------------------------*
+*& Report Z_MENSAJES_USERT1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT z_mensajes_usert1.
+
+* Tipo de mensajes
+
+* I = Informativo     Informaciòn pasada al usuario
+* S = Suscces         Mensaje exitos
+* E = Error           Mensaje de error lógico
+* W = Warnig          Mensaje warning
+* A = cancelación     Mensaje de cancelación
+
+* Pantalla de ingreso de datos de selecciòn
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
+SELECTION-SCREEN SKIP.
+PARAMETERS: pa_msj TYPE c LENGTH 1.
+SELECTION-SCREEN END OF BLOCK b1.
+
+AT SELECTION-SCREEN ON pa_msj.
+  IF pa_msj EQ 'E'.
+    MESSAGE e012(sabapdocu).
+  ELSEIF pa_msj EQ 'W'.
+    MESSAGE s013(sabapdocu).
+  ENDIF.
+
+START-OF-SELECTION.
+  CASE pa_msj.
+
+    WHEN 'I'.
+      MESSAGE i014(sabapdocu).
+
+    WHEN 'S'.
+      MESSAGE s015(sabapdocu).
+
+    WHEN 'A'.
+      MESSAGE a016(sabapdocu).
+
+    WHEN OTHERS.
+      MESSAGE i007(sabapdocu).
+
+  ENDCASE.

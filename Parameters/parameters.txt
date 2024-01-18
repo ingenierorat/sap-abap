@@ -1,0 +1,19 @@
+*&---------------------------------------------------------------------*
+*& Report ZPRACTICA
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zpractica.
+
+
+PARAMETERS: p_nombre TYPE c LENGTH 20 OBLIGATORY LOWER CASE, "Declaración de Parametros normales
+            p_apelli TYPE c LENGTH 20.
+
+
+PARAMETERS: p_show1 AS CHECKBOX DEFAULT 'X', "Declaración de Parametros CHECKBOX
+            p_show2 AS CHECKBOX,
+            p_shw3  AS CHECKBOX.
+
+PARAMETERS: R_ALL  RADIOBUTTON GROUP 001, "Declaración de Parametros RADIOBUTTON
+            R_NONE RADIOBUTTON GROUP 001 DEFAULT 'X',
+            R_EVEN RADIOBUTTON GROUP 001.

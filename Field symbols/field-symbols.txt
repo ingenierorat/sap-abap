@@ -1,0 +1,19 @@
+*&---------------------------------------------------------------------*
+*& Report ZPRACTICA
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zpractica.
+
+DATA: string(4) VALUE 'Text',
+      num       TYPE p VALUE 100,
+      today     TYPE d VALUE '20220320'.
+
+FIELD-SYMBOLS <temp>.
+
+ASSIGN string TO <temp>.
+WRITE <temp>.
+ASSIGN num TO <temp>.
+WRITE <temp>.
+ASSIGN today TO <temp>.
+WRITE <temp>.

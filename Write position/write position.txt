@@ -1,0 +1,16 @@
+*&---------------------------------------------------------------------*
+*& Report ZPRACTICA
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zpractica.
+
+DATA: tex(30) TYPE c VALUE 'Hola Rafael'.
+DATA: position TYPE I, wide TYPE I.
+
+MOVE 5 TO position.
+MOVE 15 TO wide.
+
+WRITE AT position(wide) tex.
+
+WRITE /10(15) tex.

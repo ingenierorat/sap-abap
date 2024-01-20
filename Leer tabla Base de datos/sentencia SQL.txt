@@ -1,0 +1,38 @@
+*&---------------------------------------------------------------------*
+*& Report ZLEER_TABLA_MARA
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zleer_tabla_mara.
+
+* Declaraciòn de tabla interna con cabecera
+DATA: BEGIN OF it_mara OCCURS 0,
+        material LIKE mara-matnr,
+        fecham   LIKE mara-laeda,
+      END OF it_mara.
+
+* Pantalla de selecciòn
+SELECTION-SCREEN BEGIN OF BLOCK b1.
+
+PARAMETERS: pa_mat TYPE mara-matnr.
+
+SELECTION-SCREEN END OF BLOCK b1.
+
+* Consulta SQL a la tabla Mara
+SELECT matnr laeda
+FROM mara
+INTO TABLE it_mara
+WHERE matnr EQ pa_mat.
+
+* Asegurarnos que la consulta trajo datos
+IF sy-subrc EQ 0.
+
+  LOOP AT it_mara.
+
+    WRITE:/ 'Material: ', it_mara-material,
+          / 'Fecha modificado: ', it_mara-fecham.
+  ENDLOOP.
+
+ELSE.
+  MESSAGE i003(zusert1).
+ENDIF.

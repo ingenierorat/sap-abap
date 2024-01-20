@@ -12,6 +12,7 @@ REPORT z_mensajes_usert1.
 * E = Error           Mensaje de error lógico
 * W = Warnig          Mensaje warning
 * A = cancelación     Mensaje de cancelación
+* X = Error           En ABAP, el mensaje de cancelación (X) es un tipo de mensaje que genera un error en tiempo de ejecución o un volcado.
 
 * Pantalla de ingreso de datos de selecciòn
 SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
@@ -37,6 +38,9 @@ START-OF-SELECTION.
 
     WHEN 'A'.
       MESSAGE a016(sabapdocu).
+
+      WHEN 'X'.
+        MESSAGE a016(sabapdocu).
 
     WHEN OTHERS.
       MESSAGE i007(sabapdocu).

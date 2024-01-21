@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Report ZINSERTAR_USERT1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zinsertar_usert1.
+
+* Declaramos el area de trabajo
+DATA gwa_empleado TYPE zemp_usert1.
+
+* Llenamos el àrea de tranbajo con los datos de lugar.
+gwa_empleado-id = 2678.
+gwa_empleado-email = 'sandy@gmail.com'.
+gwa_empleado-ape1 = 'Sandy'.
+gwa_empleado-ape2 = 'Lora'.
+gwa_empleado-nombre = 'Sandy'.
+gwa_empleado-fechan = '19750425'.
+gwa_empleado-fechaa = '20240512'.
+
+* Insertamos en base de dato el registro
+INSERT zemp_usert1 FROM gwa_empleado.
+
+* Validamos que se haya insertado el registro.
+IF sy-subrc EQ 0.
+
+  MESSAGE i001(zusert1).
+
+ELSE.
+
+  MESSAGE i002(zusert1).
+
+ENDIF.

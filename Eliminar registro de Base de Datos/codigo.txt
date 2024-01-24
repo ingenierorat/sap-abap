@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Report ZELIMINAR_USERT1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zeliminar_usert1.
+
+* Declarar el àrea de trabajo a utilizar
+DATA it_empleado TYPE zemp_usert1.
+
+* Pantalla de selecciòn de datos
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-007.
+
+PARAMETERS: pa_id TYPE  c LENGTH 4 OBLIGATORY.
+
+SELECTION-SCREEN END OF BLOCK b1.
+
+* Consulta a Base de Datos para obtener el registro a eliminar
+SELECT SINGLE *
+FROM zemp_usert1
+INTO it_empleado
+WHERE id EQ pa_id.
+
+* Preguntar si el registro fue encontrado para luego ser eliminado
+IF sy-subrc EQ 0.
+
+  DELETE zemp_usert1 FROM it_empleado.
+  MESSAGE i005(zusert1).
+
+ELSE.
+  MESSAGE i004(zusert1).
+
+ENDIF.

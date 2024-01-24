@@ -1,0 +1,49 @@
+&---------------------------------------------------------------------*
+*& Report ZACTUALIZAR_USERT1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zactualizar_usert1.
+
+* Pantllas de selecciòn y parametro de entrada.
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE TEXT-002.
+PARAMETERS: pa_id TYPE c LENGTH 4.
+SELECTION-SCREEN END OF BLOCK b2.
+
+SELECTION-SCREEN SKIP.
+
+PARAMETERS: pa_ape1  TYPE c LENGTH 30,
+            pa_ape2  TYPE c LENGTH 30,
+            pa_nom   TYPE c LENGTH 30.
+
+SELECTION-SCREEN END OF BLOCK b1.
+
+* Declaraciòn del àrea de trabajo
+DATA gwa_empleado TYPE zemp_usert1.
+
+* Cosulta a base de datos
+SELECT SINGLE *
+FROM zemp_usert1
+INTO gwa_empleado
+WHERE id EQ pa_id.
+
+* Preguntar si la consulta trabo resultado
+IF sy-subrc EQ 0.
+
+  gwa_empleado-ape1 = pa_ape1.
+  gwa_empleado-ape2 = pa_ape2.
+  gwa_empleado-nombre = pa_nom.
+
+  UPDATE zemp_usert1 FROM gwa_empleado.
+
+  IF sy-subrc EQ 0.
+    MESSAGE i006(zusert1).
+    ELSE.
+      MESSAGE i008(zusert1).
+  ENDIF.
+
+ELSE.
+  MESSAGE i007(zusert1).
+ENDIF.

@@ -1,0 +1,31 @@
+*&---------------------------------------------------------------------*
+*& Report ZLECTURA_TABLA_CON_READ
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zlectura_tabla_con_read.
+
+* Declarar la tabla interna y el area de trabajo
+DATA: git_empleado TYPE STANDARD TABLE OF zemp_usert1,
+      gwa_empleado TYPE zemp_usert1.
+
+* Cosulta a base de datos para llenar la tabla interna.
+SELECT *
+FROM zemp_usert1
+INTO TABLE git_empleado.
+
+* Leer la tabla interna y, filtrar los datos por el ID de la tabla.
+READ TABLE git_empleado INTO gwa_empleado
+     WITH KEY id = '2678'.
+
+* Si la tabla trajo registro, la llenamos con sus datos.
+IF sy-subrc EQ 0.
+  WRITE: / 'ID:', gwa_empleado-id,
+         / 'Primer apellido:', gwa_empleado-ape1,
+         / 'Segundo apellido:', gwa_empleado-ape2,
+         / 'Nombre:', gwa_empleado-nombre,
+         / 'Fecha nacimiento:', gwa_empleado-fechan,
+         / 'Fecha modificada:', gwa_empleado-fechaa.
+ELSE.
+  MESSAGE i007(zusert1).
+ENDIF.

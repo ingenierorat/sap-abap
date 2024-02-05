@@ -31,7 +31,7 @@ AT SELECTION-SCREEN ON pa_val.
   ENDIF.
 
 
-* Seejecuta luego de presionar F8 o el reloj.
+* Se ejecuta luego de presionar F8 o el reloj.
 START-OF-SELECTION.
 
 WRITE: 'La fechas del sistema es: ', sy-datum.

@@ -1,0 +1,37 @@
+*&---------------------------------------------------------------------*
+*& Report Z_TIPO_EVENTOS_USERT1
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT z_tipo_eventos_usert1.
+
+*--------------------------------------------------------------------------------
+*& Estos son los Eventos que se usan en el desarrollo de la pantalla de selecciòn
+*& Los demàs se usan en otra eventualidades, por tal razòn lo vereremos en otro ambito
+
+* Campos de la pantalla.
+PARAMETERS pa_val TYPE c LENGTH 1.
+* Salto de lìneas.
+SELECTION-SCREEN SKIP.
+
+PARAMETERS pa_fecha TYPE sydatum.
+
+* Se ejecuta antes de que la pantalla salga.
+INITIALIZATION.
+  pa_fecha = sy-datum.
+
+* Se ejecuta sobre la validaciòn de un campo.
+AT SELECTION-SCREEN ON pa_val.
+
+* Preguntar si se ha introducido la letra correcta, debe ser diferente a la R.
+  IF pa_val EQ 'R'.
+    MESSAGE 'Error, debe ingresar una letra diferente a la R' TYPE 'E'.
+  ELSE.
+    MESSAGE 'Campo validado' TYPE 'S'.
+  ENDIF.
+
+
+* Seejecuta luego de presionar F8 o el reloj.
+START-OF-SELECTION.
+
+WRITE: 'La fechas del sistema es: ', sy-datum.

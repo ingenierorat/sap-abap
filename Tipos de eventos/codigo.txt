@@ -10,11 +10,19 @@ REPORT z_tipo_eventos_usert1.
 *& Los demàs se usan en otra eventualidades, por tal razòn lo vereremos en otro ambito
 
 * Campos de la pantalla.
-PARAMETERS pa_val TYPE c LENGTH 1.
+PARAMETERS pa_val TYPE c LENGTH 1. " Valor 1
 * Salto de lìneas.
 SELECTION-SCREEN SKIP.
 
-PARAMETERS pa_fecha TYPE sydatum.
+PARAMETERS pa_fecha TYPE sydatum. " Fecha
+
+SELECTION-SCREEN skip.
+
+PARAMETERS pa_nom type c LENGTH 30. " Nombre
+
+* Este evento es el primero en ejecutarse.
+LOAD-OF-PROGRAM.
+pa_nom = 'Rafael Torres'.
 
 * Se ejecuta antes de que la pantalla salga.
 INITIALIZATION.
@@ -30,8 +38,7 @@ AT SELECTION-SCREEN ON pa_val.
     MESSAGE 'Campo validado' TYPE 'S'.
   ENDIF.
 
-
-* Se ejecuta luego de presionar F8 o el reloj.
+* Seejecuta luego de presionar F8 o el reloj.
 START-OF-SELECTION.
 
-WRITE: 'La fechas del sistema es: ', sy-datum.
+  WRITE: 'La fechas del sistema es: ', sy-datum.

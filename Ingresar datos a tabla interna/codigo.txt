@@ -1,0 +1,31 @@
+*&---------------------------------------------------------------------*
+*& Report Z_TABLA_INTERNA_ADD
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT z_tabla_interna_add.
+
+
+DATA: git_factura TYPE STANDARD TABLE OF vbrk, " Table interna
+      gwa_factura TYPE vbrk. " Àrea de trabajo
+
+* Primera factura
+gwa_factura-vbeln = 'bn2255'.
+gwa_factura-fkdat = '19800626'.
+APPEND gwa_factura TO git_factura.
+
+* Seguna factura
+gwa_factura-vbeln = 'bn2244'.
+gwa_factura-fkdat = '19900626'.
+APPEND gwa_factura TO git_factura.
+
+* Tercera factura
+gwa_factura-vbeln = 'bn2266'.
+gwa_factura-fkdat = '196080626'.
+APPEND gwa_factura TO git_factura.
+
+* Recorrer la tabla
+LOOP AT git_factura INTO gwa_factura.
+  WRITE: / 'Factura: ', gwa_factura-vbeln,
+           'Fecha: ', gwa_factura-fkdat.
+ENDLOOP.

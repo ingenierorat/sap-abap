@@ -1,0 +1,41 @@
+*&---------------------------------------------------------------------*
+*& Report ZSOLAPAS_RTORRES
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zsolapas_rtorres.
+
+SELECTION-SCREEN BEGIN OF SCREEN 101 AS SUBSCREEN. "Solapas
+
+  PARAMETERS campo1(15) TYPE c.
+
+SELECTION-SCREEN END OF SCREEN 101.
+
+SELECTION-SCREEN BEGIN OF SCREEN 102 AS SUBSCREEN.
+
+  PARAMETERS campo2(5) TYPE c.
+
+SELECTION-SCREEN END OF SCREEN 102.
+
+SELECTION-SCREEN BEGIN OF SCREEN 103 AS SUBSCREEN.
+
+  PARAMETERS campo3(5) TYPE c.
+
+SELECTION-SCREEN END OF SCREEN 103.
+
+SELECTION-SCREEN BEGIN OF BLOCK parte8 WITH FRAME TITLE TEXT-008.
+
+  SELECTION-SCREEN BEGIN OF TABBED BLOCK parte7 FOR 15 LINES.
+
+    SELECTION-SCREEN TAB (15) name1 USER-COMMAND ucomm1 DEFAULT SCREEN 101.
+    SELECTION-SCREEN TAB (15) name2 USER-COMMAND ucomm2 DEFAULT SCREEN 102.
+    SELECTION-SCREEN TAB (15) name3 USER-COMMAND ucomm3 DEFAULT SCREEN 103.
+
+  SELECTION-SCREEN END OF BLOCK parte7.
+
+SELECTION-SCREEN END OF BLOCK parte8.
+
+INITIALIZATION.
+  name1 = 'Primera solapa'.
+  name2 = 'Segunada solapa'.
+  name3 = 'Tacera solapa'.

@@ -5,9 +5,12 @@
 *&---------------------------------------------------------------------*
 REPORT z_upload_to_app_server.
 
+DATA: gv_name_file TYPE string.
+
 SELECTION-SCREEN: BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
-  PARAMETERS: p_file TYPE string DEFAULT 'C:\miarchivo.txt'  OBLIGATORY,
-              p_name TYPE string DEFAULT 'abap_02.txt'.
+
+  PARAMETERS: p_file TYPE string DEFAULT 'C:\miarchivo.txt'  OBLIGATORY.
+
 SELECTION-SCREEN: END OF BLOCK b1.
 
 * Poner el parametro de solo lectura.
@@ -24,8 +27,14 @@ AT SELECTION-SCREEN OUTPUT.
 
   ENDLOOP.
 
-  CONSTANTS: c_app_path TYPE string VALUE '/usr/sap/trans/prueba1/'.
 
+START-OF-SELECTION.
+
+* Nombre del archivo.
+  gv_name_file = |abap{ sy-datum }.txt|.
+* Ruta completa.
+  CONSTANTS: c_app_path TYPE string VALUE '/usr/sap/trans/prueba1/'.
+* Tabla interna Binaria.
   TYPES: tt_bin TYPE STANDARD TABLE OF x255 WITH EMPTY KEY.
 
   DATA:
@@ -47,7 +56,7 @@ AT SELECTION-SCREEN OUTPUT.
   ENDIF.
 
 * Construir ruta completa en application server
-  lv_full = c_app_path && p_name.
+  lv_full = c_app_path && gv_name_file.
 
 * Abrir dataset en App-Server
   OPEN DATASET lv_full FOR OUTPUT IN BINARY MODE.
@@ -73,4 +82,4 @@ AT SELECTION-SCREEN OUTPUT.
   CLOSE DATASET lv_full.
 
 * Mensaje final
-  MESSAGE |Archivo «{ p_name }» subido exitosamente a { c_app_path }| TYPE 'S'.
+  MESSAGE |Archivo «{ gv_name_file }» subido exitosamente a { c_app_path }| TYPE 'S'.

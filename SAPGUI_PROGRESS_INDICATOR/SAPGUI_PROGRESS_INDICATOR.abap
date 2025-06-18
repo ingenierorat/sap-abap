@@ -1,32 +1,28 @@
-*&---------------------------------------------------------------------*
-*& Report ZTEST_RTORRES
-*&---------------------------------------------------------------------*
-*&
-*&---------------------------------------------------------------------*
-REPORT ztest_rtorres.
 
-DATA: lv_progress TYPE i,
-      lv_text(30) TYPE c.
+***Todo esto va debtro de un Loop.
 
-DO 100 TIMES.
+* Variables locales de progreso y de texto a utilizar.
+  DATA: lv_progress TYPE p,
+        lv_text(30) TYPE c.
+        
 
-  lv_progress = sy-index.
-  lv_text = |Procesando { lv_progress }%...|.
+* Obtener la cantidad que registro que tiene la tabla.
+  DESCRIBE TABLE git_mara LINES lv_line.
 
-  " Actualizar indicador de progreso.
 
+*   Asignar los valores a las variables.
+    lv_progress = ( sy-tabix / lv_line ) * 100.
+    lv_text = |Procesando { lv_progress }%...|.
+
+*   Actuaizar indicador de progreso.
+    CALL FUNCTION 'SAPGUI_PROGRESS_INDICATOR'
+      EXPORTING
+        percentage = lv_progress
+        text       = lv_text.
+
+
+* Reestablecer el indicador de progreso.
   CALL FUNCTION 'SAPGUI_PROGRESS_INDICATOR'
     EXPORTING
-      percentage = lv_progress
-      text       = lv_text.
-
-  " Simular un proceso largo
-  WAIT UP TO 2 SECONDS.
-
-ENDDO.
-
-" Reestable cer el idicador de proceso.
-CALL FUNCTION 'SAPGUI_PROGRESS_INDICATOR'
-  EXPORTING
-    percentage = 0
-    text       = ''.
+      percentage = 0
+      text       = ''.
